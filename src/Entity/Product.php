@@ -20,7 +20,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     },
  *     itemOperations={
  *         "get",
- *         "put": {"security": "is_granted('ROLE_ADMIN')"}
+ *         "put": {"security": "is_granted('ROLE_ADMIN')"},
+ *         "delete": {"security": "is_granted('ROLE_ADMIN')"}
  *     },
  *     attributes={
  *         "normalization_context": {"groups": {"Product:read"}},
@@ -50,8 +51,8 @@ class Product
     /**
      * @ORM\ManyToMany(targetEntity="Image", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="products_images",
-     *     joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id")}
+     *     joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      * @ApiProperty(iri="http://schema.org/image")
      * @Groups({"Product:read", "Product:write"})
