@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,11 +15,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     iri="http://schema.org/ItemList",
  *     collectionOperations={
  *         "get",
- *         "post": {"security": "is_granted('ROLE_ADMIN')"}
+ *         "post": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"Category:write"}}
  *     },
  *     itemOperations={
  *         "get",
- *         "put": {"security": "is_granted('ROLE_ADMIN')"},
+ *         "put": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"Category:write"}},
  *         "delete": {"security": "is_granted('ROLE_ADMIN')"}
  *     },
  *     attributes={
@@ -44,12 +45,13 @@ class Category
      *
      * @ORM\Column(type="string", nullable=false, length=255)
      * @ApiProperty(iri="http://schema.org/name", required=true)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(groups={"Category:write"})
      * @Groups({"Category:read", "Category:write"})
      */
     public $name;
 
     /**
+     * @var Collection
      * @ORM\ManyToMany(targetEntity="Product", mappedBy="category", cascade={"persist", "remove"})
      */
     public $products;

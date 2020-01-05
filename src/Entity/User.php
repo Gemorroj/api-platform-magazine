@@ -20,6 +20,7 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @var string
      * @ORM\Column(type="string", length=180, unique=true, nullable=false)
      * @Assert\NotBlank
      * @Assert\Email
@@ -27,6 +28,7 @@ class User implements UserInterface
     private $email;
 
     /**
+     * @var array
      * @ORM\Column(type="json", nullable=false)
      */
     private $roles = [];
@@ -47,7 +49,7 @@ class User implements UserInterface
     /**
      * @ORM\PrePersist
      */
-    public function prePersist()
+    public function prePersist(): void
     {
         $this->createdAt = new \DateTimeImmutable();
     }
@@ -121,15 +123,16 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getSalt()
+    public function getSalt(): ?string
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
+        return null;
     }
 
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
