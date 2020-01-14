@@ -16,9 +16,6 @@
             "./src/Entity/.gitignore"
         ]
     },
-    "behat/transliterator": {
-        "version": "v1.2.0"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -247,10 +244,16 @@
     "symfony/mime": {
         "version": "v5.0.2"
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.13.1"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.13.1"
     },
     "symfony/polyfill-intl-idn": {
+        "version": "v1.13.1"
+    },
+    "symfony/polyfill-intl-normalizer": {
         "version": "v1.13.1"
     },
     "symfony/polyfill-mbstring": {
@@ -309,7 +312,7 @@
     "symfony/service-contracts": {
         "version": "v2.0.1"
     },
-    "symfony/templating": {
+    "symfony/string": {
         "version": "v5.0.2"
     },
     "symfony/translation-contracts": {
