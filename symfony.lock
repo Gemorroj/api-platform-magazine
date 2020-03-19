@@ -115,6 +115,9 @@
             "./config/packages/nelmio_cors.yaml"
         ]
     },
+    "ocramius/package-versions": {
+        "version": "1.5.1"
+    },
     "php": {
         "version": "7.3"
     },
