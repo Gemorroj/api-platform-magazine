@@ -2,9 +2,9 @@
 
 namespace App\Resolver;
 
+use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
 use App\Entity\Image;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
 
 final class CreateImageObjectResolver implements MutationResolverInterface
 {

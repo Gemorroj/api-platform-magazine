@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Action\NotFoundAction;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,15 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  *     iri="http://schema.org/ItemList",
- *     collectionOperations={
- *         "get",
- *         "post": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"write"}}
- *     },
- *     itemOperations={
- *         "get",
- *         "put": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"write"}},
- *         "delete": {"security": "is_granted('ROLE_ADMIN')"}
- *     },
+ *     collectionOperations={},
+ *     itemOperations={"get": {"controller": NotFoundAction::class, "read": false, "output": false}},
  *     attributes={
  *         "force_eager": false,
  *         "normalization_context": {"groups": {"read"}},
@@ -30,9 +24,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     graphql={
  *         "item_query",
  *         "collection_query",
- *         "delete"={"security"="is_granted('ROLE_ADMIN')"},
- *         "update"={"security"="is_granted('ROLE_ADMIN')", "validation_groups": {"write"}},
- *         "create"={"security"="is_granted('ROLE_ADMIN')", "validation_groups": {"write"}}
+ *         "delete": {"security": "is_granted('ROLE_ADMIN')"},
+ *         "update": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"write"}},
+ *         "create": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"write"}}
  *     }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")

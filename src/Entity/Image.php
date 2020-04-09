@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Action\NotFoundAction;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Controller\CreateImageObjectAction;
 use App\Resolver\CreateImageObjectResolver;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -20,48 +20,22 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *         "normalization_context": {"groups": {"read"}},
  *         "denormalization_context": {"groups": {"write"}}
  *     },
- *     collectionOperations={
- *         "post": {
- *             "controller": CreateImageObjectAction::class,
- *             "deserialize": false,
+ *     collectionOperations={},
+ *     itemOperations={"get": {"controller": NotFoundAction::class, "read": false, "output": false}},
+ *     graphql={
+ *         "upload": {
  *             "security": "is_granted('ROLE_ADMIN')",
  *             "validation_groups": {"write"},
- *             "openapi_context": {
- *                 "requestBody": {
- *                     "content": {
- *                         "multipart/form-data": {
- *                             "schema": {
- *                                 "type": "object",
- *                                 "properties": {
- *                                     "file": {
- *                                         "type": "string",
- *                                         "format": "binary"
- *                                     }
- *                                 }
- *                             }
- *                         }
- *                     }
- *                 }
- *             }
- *         },
- *         "get"
- *     },
- *     itemOperations={
- *         "get",
- *         "delete": {"security": "is_granted('ROLE_ADMIN')"}
- *     },
- *     graphql={
- *        "upload"={
- *             "mutation"=CreateImageObjectResolver::class,
- *             "deserialize"=false,
- *             "args"={
- *                 "file"={"type"="Upload!", "description"="The file to upload"}
+ *             "mutation": CreateImageObjectResolver::class,
+ *             "deserialize": false,
+ *             "args": {
+ *                 "file": {"type": "Upload!", "description": "The file to upload"}
  *             }
  *         },
  *         "item_query",
  *         "collection_query",
- *         "delete"={"security"="is_granted('ROLE_ADMIN')"},
- *         "create"={"security"="is_granted('ROLE_ADMIN')", "validation_groups": {"write"}}
+ *         "delete": {"security": "is_granted('ROLE_ADMIN')"},
+ *         "create": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"write"}}
  *     }
  * )
  * @Vich\Uploadable

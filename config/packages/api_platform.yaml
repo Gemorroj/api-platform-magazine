@@ -1,15 +1,15 @@
 api_platform:
     title: Magazine API
     version: 1.0.0
-
-    enable_swagger_ui: true
-
-    collection:
-        pagination:
-            enabled: false
-
+    enable_swagger: false
+    enable_swagger_ui: false
+    enable_re_doc: false
+    enable_entrypoint: false
+    enable_docs: false
+    enable_profiler: false
 
     graphql:
+        enabled: true
         default_ide: graphiql
         graphiql:
             enabled: true
@@ -17,12 +17,14 @@ api_platform:
             pagination:
                 enabled: false
 
+    mercure:
+        enabled: false
+        hub_url: null
+    messenger:
+        enabled: false
+
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
-
-    patch_formats:
-        json:     ['application/merge-patch+json']
-        jsonapi:  ['application/vnd.api+json']
 
     formats:
         multipart: ['multipart/form-data']
@@ -35,10 +37,3 @@ api_platform:
         yaml:      ['application/x-yaml']
         csv:       ['text/csv']
         html:      ['text/html']
-
-    swagger:
-        versions: [3]
-        api_keys:
-            apiKey:
-                name: Authorization
-                type: header
