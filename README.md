@@ -2,7 +2,7 @@
 
 ### Requires
 - 7.3+ (Symfony 5)
-- Mysql/Postgres/ some other `dbal` databases
+- Mysql/Postgres/some other `dbal` databases
 
 
 ### Installation

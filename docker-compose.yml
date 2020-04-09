@@ -1,0 +1,46 @@
+version: '3.7'
+
+volumes:
+  m-pgdata:
+
+services:
+  pgsql:
+    build:
+      context: ./.docker/pgsql
+      dockerfile: Dockerfile
+    container_name: m-pgsql
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=passwoRt
+      - POSTGRES_USER=web
+      - POSTGRES_DB=m
+    volumes:
+      - m-pgdata:/var/lib/postgresql/data
+      - ./.docker/pgsql/init-schema.sql:/docker-entrypoint-initdb.d/init-schema.sql
+      - ./.docker/pgsql/postgresql.conf:/etc/postgresql/postgresql.conf
+
+  php:
+    build:
+      context: ./.docker/php
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/var/www/app'
+    container_name: m-php
+    ports:
+      - "9000:9000"
+    depends_on:
+      - pgsql
+
+  nginx:
+    build:
+      context: ./.docker/nginx
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/var/www/app'
+    ports:
+      - "80:80"
+    container_name: m-nginx
+    depends_on:
+      - php
