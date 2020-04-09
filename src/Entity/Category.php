@@ -15,17 +15,24 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     iri="http://schema.org/ItemList",
  *     collectionOperations={
  *         "get",
- *         "post": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"Category:write"}}
+ *         "post": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"write"}}
  *     },
  *     itemOperations={
  *         "get",
- *         "put": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"Category:write"}},
+ *         "put": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"write"}},
  *         "delete": {"security": "is_granted('ROLE_ADMIN')"}
  *     },
  *     attributes={
  *         "force_eager": false,
- *         "normalization_context": {"groups": {"Category:read"}},
- *         "denormalization_context": {"groups": {"Category:write"}}
+ *         "normalization_context": {"groups": {"read"}},
+ *         "denormalization_context": {"groups": {"write"}}
+ *     },
+ *     graphql={
+ *         "item_query",
+ *         "collection_query",
+ *         "delete"={"security"="is_granted('ROLE_ADMIN')"},
+ *         "update"={"security"="is_granted('ROLE_ADMIN')", "validation_groups": {"write"}},
+ *         "create"={"security"="is_granted('ROLE_ADMIN')", "validation_groups": {"write"}}
  *     }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -36,7 +43,7 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
-     * @Groups({"Category:read"})
+     * @Groups({"read"})
      */
     private $id;
 
@@ -45,14 +52,15 @@ class Category
      *
      * @ORM\Column(type="string", nullable=false, length=255)
      * @ApiProperty(iri="http://schema.org/name", required=true)
-     * @Assert\NotBlank(groups={"Category:write"})
-     * @Groups({"Category:read", "Category:write"})
+     * @Assert\NotBlank(groups={"write"})
+     * @Groups({"read", "write"})
      */
     public $name;
 
     /**
      * @var Collection
      * @ORM\ManyToMany(targetEntity="Product", mappedBy="category", cascade={"persist", "remove"})
+     * @Groups({"read", "write"})
      */
     public $products;
 

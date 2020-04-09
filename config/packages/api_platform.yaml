@@ -2,14 +2,40 @@ api_platform:
     title: Magazine API
     version: 1.0.0
 
+    enable_swagger_ui: true
+
     collection:
         pagination:
             enabled: false
 
+
+    graphql:
+        default_ide: graphiql
+        graphiql:
+            enabled: true
+        collection:
+            pagination:
+                enabled: false
+
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
+
     patch_formats:
-        json: ['application/merge-patch+json']
+        json:     ['application/merge-patch+json']
+        jsonapi:  ['application/vnd.api+json']
+
+    formats:
+        multipart: ['multipart/form-data']
+        graphql:   ['application/graphql']
+        jsonld:    ['application/ld+json']
+        jsonhal:   ['application/hal+json']
+        jsonapi:   ['application/vnd.api+json']
+        json:      ['application/json']
+        xml:       ['application/xml', 'text/xml']
+        yaml:      ['application/x-yaml']
+        csv:       ['text/csv']
+        html:      ['text/html']
+
     swagger:
         versions: [3]
         api_keys:

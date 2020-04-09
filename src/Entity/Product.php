@@ -20,16 +20,23 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     iri="http://schema.org/Product",
  *     collectionOperations={
  *         "get",
- *         "post": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"Product:write"}}
+ *         "post": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"write"}}
  *     },
  *     itemOperations={
  *         "get",
- *         "put": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"Product:write"}},
+ *         "put": {"security": "is_granted('ROLE_ADMIN')", "validation_groups": {"write"}},
  *         "delete": {"security": "is_granted('ROLE_ADMIN')"}
  *     },
  *     attributes={
- *         "normalization_context": {"groups": {"Product:read"}},
- *         "denormalization_context": {"groups": {"Product:write"}}
+ *         "normalization_context": {"groups": {"read"}},
+ *         "denormalization_context": {"groups": {"write"}}
+ *     },
+ *     graphql={
+ *         "item_query",
+ *         "collection_query",
+ *         "delete"={"security"="is_granted('ROLE_ADMIN')"},
+ *         "update"={"security"="is_granted('ROLE_ADMIN')", "validation_groups": {"write"}},
+ *         "create"={"security"="is_granted('ROLE_ADMIN')", "validation_groups": {"write"}}
  *     }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -40,7 +47,7 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer", nullable=false, options={"unsigned": true})
-     * @Groups({"Product:read"})
+     * @Groups({"read"})
      */
     private $id;
 
@@ -48,6 +55,7 @@ class Product
      * @var \DateTimeImmutable
      *
      * @ORM\Column(type="datetimetz_immutable", nullable=false)
+     * @Groups({"read"})
      */
     public $createdAt;
 
@@ -59,7 +67,7 @@ class Product
      *     inverseJoinColumns={@ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      * @ApiProperty(iri="http://schema.org/image")
-     * @Groups({"Product:read", "Product:write"})
+     * @Groups({"read", "write"})
      */
     public $image;
 
@@ -68,8 +76,8 @@ class Product
      *
      * @ORM\Column(type="string", nullable=false, length=255)
      * @ApiProperty(iri="http://schema.org/name", required=true)
-     * @Assert\NotBlank(groups={"Product:write"})
-     * @Groups({"Product:read", "Product:write"})
+     * @Assert\NotBlank(groups={"write"})
+     * @Groups({"read", "write"})
      */
     public $name;
 
@@ -78,7 +86,7 @@ class Product
      *
      * @ORM\Column(type="string", nullable=true, length=5000)
      * @ApiProperty(iri="http://schema.org/description", required=false)
-     * @Groups({"Product:read", "Product:write"})
+     * @Groups({"read", "write"})
      */
     public $description;
 
@@ -86,8 +94,8 @@ class Product
      * @var Collection
      * @ORM\OneToMany(targetEntity="Offer", mappedBy="product", cascade={"persist", "remove"})
      * @ApiProperty(iri="http://schema.org/Offer")
-     * @Groups({"Product:read", "Product:write"})
-     * @Assert\Valid(groups={"Product:write"})
+     * @Groups({"read", "write"})
+     * @Assert\Valid(groups={"write"})
      */
     public $offers;
 
@@ -95,8 +103,8 @@ class Product
      * @var Collection
      * @ORM\OneToMany(targetEntity="Property", mappedBy="product", cascade={"persist", "remove"})
      * @ApiProperty(iri="http://schema.org/additionalProperty")
-     * @Groups({"Product:read", "Product:write"})
-     * @Assert\Valid(groups={"Product:write"})
+     * @Groups({"read", "write"})
+     * @Assert\Valid(groups={"write"})
      */
     public $additionalProperty;
 
@@ -105,7 +113,7 @@ class Product
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="products")
      * @ORM\JoinTable(name="products_categories")
      * @ApiProperty(iri="http://schema.org/category")
-     * @Groups({"Product:read", "Product:write"})
+     * @Groups({"read", "write"})
      */
     public $category;
 
