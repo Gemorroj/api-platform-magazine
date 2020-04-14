@@ -23,7 +23,7 @@ RUN set -xe \
     && docker-php-ext-install intl \
     && docker-php-ext-enable intl \
 
-    && curl -L -o /composer.phar https://github.com/composer/composer/releases/download/1.10.1/composer.phar \
+    && curl -L -o /composer.phar https://github.com/composer/composer/releases/download/1.10.5/composer.phar \
     && chmod 777 /composer.phar \
 
     && apk del .build-deps \
