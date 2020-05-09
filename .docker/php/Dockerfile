@@ -28,10 +28,6 @@ RUN set -xe \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
 
-    # Composer
-    && curl -L -o /composer.phar https://github.com/composer/composer/releases/download/1.10.5/composer.phar \
-    && chmod 777 /composer.phar \
-
     # Cleanup
     && apk del --no-cache .build-deps \
     && apk del --no-cache icu-dev \
@@ -43,6 +39,13 @@ RUN set -xe \
 
 # custom configs
 COPY opcache.ini $PHP_INI_DIR/conf.d/
+
+
+# Composer
+RUN set -xe \
+    && curl -L -o /composer.phar https://github.com/composer/composer/releases/download/1.10.6/composer.phar \
+    && chmod 777 /composer.phar
+
 
 # utilites
 RUN set -xe \
