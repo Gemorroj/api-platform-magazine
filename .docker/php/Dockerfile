@@ -32,13 +32,7 @@ RUN set -xe \
     && apk del --no-cache .build-deps \
     && apk del --no-cache icu-dev \
     && apk del --no-cache libsodium-dev \
-    && rm -rf /tmp/* /var/cache/apk/* \
-
-    # Default php config
-    && mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-
-# custom configs
-COPY opcache.ini $PHP_INI_DIR/conf.d/
+    && rm -rf /tmp/* /var/cache/apk/*
 
 
 # Composer
