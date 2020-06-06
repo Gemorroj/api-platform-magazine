@@ -28,6 +28,13 @@ RUN set -xe \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
 
+    # Blackfire https://blackfire.io/docs/integrations/docker/index
+    && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/amd64/$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
+    && mkdir -p /tmp/blackfire \
+    && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp/blackfire \
+    && mv /tmp/blackfire/blackfire-*.so $(php -r "echo ini_get ('extension_dir');")/blackfire.so \
+    && rm -rf /tmp/blackfire /tmp/blackfire-probe.tar.gz \
+
     # Cleanup
     && apk del --no-cache .build-deps \
     && apk del --no-cache icu-dev \

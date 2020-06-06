@@ -71,7 +71,7 @@ class Image
     /**
      * @var string|null
      *
-     * @ORM\Column(nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     public $filePath;
 

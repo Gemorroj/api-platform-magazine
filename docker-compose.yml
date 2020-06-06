@@ -4,6 +4,16 @@ volumes:
   m-pgdata:
 
 services:
+  blackfire:
+    build:
+      context: ./.docker/blackfire
+      dockerfile: Dockerfile
+    ports:
+      - "8707:8707"
+    container_name: m-blackfire
+    env_file:
+      - .env.local
+
   pgsql:
     build:
       context: ./.docker/pgsql
@@ -17,9 +27,9 @@ services:
       - POSTGRES_USER=web
       - POSTGRES_DB=m
     volumes:
-      - m-pgdata:/var/lib/postgresql/data
-      - ./.docker/pgsql/init-schema.sql:/docker-entrypoint-initdb.d/init-schema.sql
-      - ./.docker/pgsql/postgresql.conf:/etc/postgresql/postgresql.conf
+      - 'm-pgdata:/var/lib/postgresql/data'
+      - '.docker/pgsql/init-schema.sql:/docker-entrypoint-initdb.d/init-schema.sql'
+      - '.docker/pgsql/postgresql.conf:/etc/postgresql/postgresql.conf'
 
   php:
     build:
@@ -34,6 +44,7 @@ services:
       - "9000:9000" # php-fpm
     depends_on:
       - pgsql
+      - blackfire
     expose:
       - "9001" # xdebug
 
