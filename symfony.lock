@@ -173,6 +173,9 @@
     "symfony/dependency-injection": {
         "version": "v5.0.2"
     },
+    "symfony/deprecation-contracts": {
+        "version": "v2.1.2"
+    },
     "symfony/doctrine-bridge": {
         "version": "v5.0.2"
     },
@@ -244,16 +247,10 @@
     "symfony/intl": {
         "version": "v5.0.2"
     },
-    "symfony/mime": {
-        "version": "v5.0.2"
-    },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.13.1"
     },
     "symfony/polyfill-intl-icu": {
-        "version": "v1.13.1"
-    },
-    "symfony/polyfill-intl-idn": {
         "version": "v1.13.1"
     },
     "symfony/polyfill-intl-normalizer": {

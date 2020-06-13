@@ -14,8 +14,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 class UserCreateCommand extends Command
 {
     protected static $defaultName = 'app:user-create';
-    private $entityManager;
-    private $encoderFactory;
+    private EntityManagerInterface $entityManager;
+    private EncoderFactoryInterface $encoderFactory;
 
     public function __construct(EntityManagerInterface $entityManager, EncoderFactoryInterface $encoderFactory)
     {
