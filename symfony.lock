@@ -247,11 +247,17 @@
     "symfony/intl": {
         "version": "v5.0.2"
     },
+    "symfony/mime": {
+        "version": "v5.1.1"
+    },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.13.1"
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.13.1"
+    },
+    "symfony/polyfill-intl-idn": {
+        "version": "v1.17.0"
     },
     "symfony/polyfill-intl-normalizer": {
         "version": "v1.13.1"
