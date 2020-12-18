@@ -15,8 +15,8 @@ RUN set -xe \
     && docker-php-ext-install intl \
     && docker-php-ext-enable intl \
 
-    # Xdebug
-    && pecl install xdebug \
+    # Xdebug (use latest 2.x)
+    && pecl install xdebug-2.9.8 \
     && docker-php-ext-enable xdebug \
 
     # Postgresql
