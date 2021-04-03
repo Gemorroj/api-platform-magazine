@@ -1,6 +1,8 @@
 {
     "type": "project",
     "license": "MIT",
+    "description": "Magazine API",
+    "name": "gemorroj/api-platform-magazine",
     "require": {
         "php": "^7.4",
         "ext-ctype": "*",
@@ -18,12 +20,12 @@
         "symfony/flex": "^1.12",
         "symfony/framework-bundle": "5.2.*",
         "symfony/yaml": "5.2.*",
-        "vich/uploader-bundle": "^1.16",
-        "webonyx/graphql-php": "^14.5"
+        "vich/uploader-bundle": "^1.17",
+        "webonyx/graphql-php": "^14.6"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.18",
-        "symfony/maker-bundle": "^1.29"
+        "symfony/maker-bundle": "^1.30"
     },
     "config": {
         "optimize-autoloader": true,
