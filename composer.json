@@ -4,7 +4,7 @@
     "description": "Magazine API",
     "name": "gemorroj/api-platform-magazine",
     "require": {
-        "php": "^7.4",
+        "php": ">=7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-mbstring": "*",
