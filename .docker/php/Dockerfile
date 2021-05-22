@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine3.13
+FROM php:8.0-fpm-alpine3.13
 
 # Update repo and install some utilites
 RUN set -xe \
@@ -8,7 +8,7 @@ RUN set -xe \
 
 # Composer
 RUN set -xe \
-    && curl -L -o /composer.phar https://github.com/composer/composer/releases/download/2.0.13/composer.phar \
+    && curl -L -o /composer.phar https://github.com/composer/composer/releases/download/2.0.14/composer.phar \
     && chmod 755 /composer.phar
 
 # Blackfire https://blackfire.io/docs/php/integrations/php-docker
