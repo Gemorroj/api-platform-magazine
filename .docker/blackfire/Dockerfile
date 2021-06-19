@@ -1,4 +1,4 @@
-FROM blackfire/blackfire
+FROM blackfire/blackfire:2
 
 USER root
 
