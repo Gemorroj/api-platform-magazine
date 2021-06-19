@@ -1,7 +1,7 @@
 # api platform simple magazine backend
 
 ### Requires
-- 7.4+ (Symfony 5)
+- 8.0 (Symfony 5.3)
 - Mysql/Postgres/some other `dbal` databases
 
 

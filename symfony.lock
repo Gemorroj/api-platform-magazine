@@ -1,7 +1,4 @@
 {
-    "api-platform/api-pack": {
-        "version": "v1.2.1"
-    },
     "api-platform/core": {
         "version": "2.5",
         "recipe": {
@@ -124,12 +121,6 @@
     },
     "laminas/laminas-code": {
         "version": "3.4.1"
-    },
-    "laminas/laminas-eventmanager": {
-        "version": "3.3.0"
-    },
-    "laminas/laminas-zendframework-bridge": {
-        "version": "1.1.0"
     },
     "lcobucci/clock": {
         "version": "2.0.0"
@@ -303,7 +294,7 @@
         "version": "v5.0.2"
     },
     "symfony/intl": {
-        "version": "v5.0.2"
+        "version": "v5.3.0"
     },
     "symfony/maker-bundle": {
         "version": "1.0",
@@ -320,13 +311,10 @@
     "symfony/options-resolver": {
         "version": "v5.1.4"
     },
-    "symfony/orm-pack": {
-        "version": "v2.0.0"
+    "symfony/password-hasher": {
+        "version": "v5.3.2"
     },
     "symfony/polyfill-intl-grapheme": {
-        "version": "v1.13.1"
-    },
-    "symfony/polyfill-intl-icu": {
         "version": "v1.13.1"
     },
     "symfony/polyfill-intl-idn": {
@@ -334,9 +322,6 @@
     },
     "symfony/polyfill-intl-normalizer": {
         "version": "v1.13.1"
-    },
-    "symfony/polyfill-php80": {
-        "version": "v1.17.0"
     },
     "symfony/polyfill-php81": {
         "version": "v1.23.0"
@@ -367,6 +352,9 @@
             "./config/routes.yaml"
         ]
     },
+    "symfony/runtime": {
+        "version": "v5.3.2"
+    },
     "symfony/security-bundle": {
         "version": "4.4",
         "recipe": {
@@ -393,9 +381,6 @@
     },
     "symfony/serializer": {
         "version": "v5.0.2"
-    },
-    "symfony/serializer-pack": {
-        "version": "v1.0.3"
     },
     "symfony/service-contracts": {
         "version": "v2.0.1"

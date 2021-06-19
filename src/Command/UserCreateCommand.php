@@ -9,18 +9,18 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 class UserCreateCommand extends Command
 {
     protected static $defaultName = 'app:user-create';
     private EntityManagerInterface $entityManager;
-    private EncoderFactoryInterface $encoderFactory;
+    private PasswordHasherFactoryInterface $passwordHasherFactory;
 
-    public function __construct(EntityManagerInterface $entityManager, EncoderFactoryInterface $encoderFactory)
+    public function __construct(EntityManagerInterface $entityManager, PasswordHasherFactoryInterface $passwordHasherFactory)
     {
         $this->entityManager = $entityManager;
-        $this->encoderFactory = $encoderFactory;
+        $this->passwordHasherFactory = $passwordHasherFactory;
 
         parent::__construct();
     }
@@ -42,12 +42,12 @@ class UserCreateCommand extends Command
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
 
-        $encoder = $this->encoderFactory->getEncoder(User::class);
-        $encodedPassword = $encoder->encodePassword($password, null);
+        $passwordHasher = $this->passwordHasherFactory->getPasswordHasher(User::class);
+        $hashedPassword = $passwordHasher->hash($password);
 
         $user = new User();
         $user->setEmail($email);
-        $user->setPassword($encodedPassword);
+        $user->setPassword($hashedPassword);
         $user->setRoles($roles);
 
         $this->entityManager->persist($user);
