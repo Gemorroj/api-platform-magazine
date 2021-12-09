@@ -7,14 +7,12 @@ RUN set -xe \
     && apk --no-cache add htop unzip gzip
 
 # Composer
-RUN set -xe \
-    && curl -L -o /composer.phar https://github.com/composer/composer/releases/download/2.1.14/composer.phar \
-    && chmod 755 /composer.phar
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 # Blackfire https://blackfire.io/docs/php/integrations/php-docker
 RUN set -xe \
     && version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
-    && architecture=$(case $(uname -m) in i386 | i686 | x86) echo "i386" ;; x86_64 | amd64) echo "amd64" ;; aarch64 | arm64 | armv8) echo "arm64" ;; *) echo "amd64" ;; esac) \
+    && architecture=$(uname -m) \
     && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/$architecture/$version \
     && mkdir -p /tmp/blackfire \
     && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp/blackfire \
